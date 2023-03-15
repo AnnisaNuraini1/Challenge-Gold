@@ -1,0 +1,280 @@
+PENJELASAN DARI CARA MERUBAH KATA TIDAK BAKU MENJADI BAKU 
+
+untuk merubah kata dari "tidak baku" menjadi baku adalah dengan cara menggunakan fungsi :
+contoh dari fungsi :
+alay_dict_map = dict(zip(alay_dict['original'], alay_dict['replacement']))
+def Cleansing_kataabusive(text):    
+#Cleansing Kata Alay
+    text = ' '.join([alay_dict_map[word] if word in alay_dict_map else word for word in text.split(' ')])
+    text = text.strip() # Remove Space awal akhir
+    return text.lower()
+
+=> penjelasan : 
+	Kode yang diberikan terdiri dari dua bagian: pembuatan kamus alay (alay_dict_map) dan fungsi pembersihan teks dari kata-kata kasar (Cleansing_kataabusive).
+
+Pada bagian pertama (alay_dict_map = dict(zip(alay_dict['original'], alay_dict['replacement']))), sebuah kamus alay_dict_map dibuat dengan menggunakan fungsi zip() dan dict() dari Python. Kamus ini digunakan untuk mengganti kata-kata alay yang terdapat dalam teks dengan kata-kata baku.
+
+alay_dict sendiri adalah sebuah kamus yang terdiri dari dua buah list yaitu original dan replacement. List original berisi kata-kata alay, sementara list replacement berisi kata-kata baku yang akan digunakan untuk menggantikan kata-kata alay tersebut. Fungsi zip() digunakan untuk menggabungkan kedua list tersebut menjadi sebuah pasangan nilai (tuple) yang terdiri dari elemen-elemen yang berada pada posisi yang sama dari kedua list. Lalu, fungsi dict() digunakan untuk mengubah pasangan nilai tersebut menjadi sebuah kamus.
+
+Pada bagian kedua (Cleansing_kataabusive(text)), fungsi Cleansing_kataabusive() menerima sebuah parameter teks yang akan diolah. Teks tersebut dipecah menjadi kata-kata dengan menggunakan fungsi split(' ') dan kemudian setiap kata yang ada di dalamnya diperiksa apakah termasuk dalam kamus alay_dict_map atau tidak. Jika kata tersebut termasuk dalam kamus, maka kata tersebut akan diganti dengan kata baku yang ada dalam kamus alay_dict_map. Setelah itu, fungsi strip() digunakan untuk menghapus spasi di awal dan akhir teks. Terakhir, fungsi lower() digunakan untuk mengubah seluruh huruf dalam teks menjadi huruf kecil (lowercase).
+
+Dengan demikian, fungsi Cleansing_kataabusive() ini akan membersihkan teks dari kata-kata alay dan menggantinya dengan kata-kata baku yang ada dalam kamus alay_dict_map.
+
+
+fungsi apa saja yang digunakan untuk mengganti kata-kata tidak baku menjadi kata baku dalam cleaning text di python selain menggunakan fungsi zip() dan dict():
+=> Selain menggunakan fungsi zip() dan dict() untuk membuat kamus pengganti kata-kata tidak baku menjadi kata baku, terdapat beberapa fungsi lain yang dapat digunakan untuk melakukan hal serupa dalam proses pembersihan teks di Python, antara lain:
+
+Menggunakan replace(): Fungsi replace() pada objek string dapat digunakan untuk mengganti suatu substring dengan substring lain dalam sebuah teks. Misalnya, text.replace('tidak baik', 'baik') akan mengganti setiap kemunculan substring 'tidak baik' dalam teks dengan substring 'baik'.
+
+Menggunakan regex: Modul re pada Python menyediakan fungsi-fungsi untuk melakukan pencocokan pola (pattern matching) pada teks dengan menggunakan ekspresi reguler (regex). Dengan menggunakan regex, kita dapat mengidentifikasi dan mengganti kata-kata yang tidak baku atau tidak diinginkan dalam sebuah teks dengan kata-kata yang sesuai. Misalnya, re.sub(r'\btidak baik\b', 'baik', text) akan mengganti setiap kemunculan kata 'tidak baik' (yang merupakan sebuah kata lengkap) dalam teks dengan kata 'baik'.
+
+Menggunakan kamus yang telah disediakan: Terdapat beberapa kamus yang telah disediakan secara publik untuk mengganti kata-kata tidak baku atau tidak standar dalam teks menjadi kata-kata yang lebih baku atau standar. Contohnya adalah kamus KBBI atau kamus tesaurus, yang dapat digunakan untuk mengganti kata-kata yang tidak baku dengan kata-kata yang lebih baku atau sinonim dari kata tersebut. Kamus-kamus ini dapat diimpor ke dalam program Python dan digunakan untuk mengganti kata-kata yang tidak baku dalam teks.
+
+
+
+Berikut adalah contoh kode yang menggunakan fungsi replace() pada objek string untuk mengganti kata tidak baku menjadi baku dalam sebuah teks:
+1.   
+
+# Teks yang akan dibersihkan
+text = "saya tidak suka nulis pke bhs alay, sangat tidak baik untuk karir saya."
+
+# Daftar kata yang tidak baku dan kata baku penggantinya
+mapping = {
+    'nulis': 'menulis',
+    'pk': 'dengan',
+    'bhs': 'bahasa',
+    'alay': 'baku',
+    'tidak baik': 'baik'
+}
+
+# Mengganti kata-kata tidak baku dengan kata-kata baku menggunakan replace()
+for key in mapping:
+    text = text.replace(key, mapping[key])
+
+# Menampilkan hasil pembersihan teks
+print(text)
+
+	=> penjelasan :
+	Pada kode di atas, terdapat teks yang akan dibersihkan yaitu "saya tidak suka nulis pke bhs alay, sangat tidak baik untuk karir saya.". Kemudian, terdapat daftar kata yang tidak baku dan kata baku penggantinya yang disimpan dalam sebuah kamus mapping.
+
+Selanjutnya, untuk mengganti kata-kata tidak baku dengan kata-kata baku, dilakukan pengulangan menggunakan for pada setiap key yang ada pada kamus mapping. Setiap key akan diganti dengan nilai baku yang sesuai menggunakan fungsi replace(), dan hasil akhirnya disimpan dalam variabel text.
+
+Hasil akhir dari pembersihan teks tersebut adalah "saya suka menulis dengan bahasa baku, sangat baik untuk karir saya.".
+
+
+2.
+
+Berikut adalah contoh kode yang menggunakan fungsi replace() pada objek string untuk mengganti kata tidak baku menjadi baku dalam bentuk DataFrame:
+
+python
+Copy code
+import pandas as pd
+
+# Dataframe dengan kolom 'teks' yang berisi teks yang akan dibersihkan
+df = pd.DataFrame({'teks': ["saya tidak suka nulis pke bhs alay", "aku jg ngk trlalu suka bgt pk bahasa sms"]})
+
+# Daftar kata yang tidak baku dan kata baku penggantinya
+mapping = {
+    'nulis': 'menulis',
+    'pk': 'dengan',
+    'bhs': 'bahasa',
+    'alay': 'baku',
+    'ngk': 'tidak',
+    'jg': 'juga',
+    'bgt': 'banget',
+    'sms': 'singkatan'
+}
+
+# Mengganti kata-kata tidak baku dengan kata-kata baku menggunakan replace()
+for key in mapping:
+    df['teks'] = df['teks'].str.replace(key, mapping[key])
+
+# Menampilkan hasil pembersihan teks
+print(df)
+Pada kode di atas, terdapat sebuah DataFrame yang memiliki satu kolom bernama 'teks' yang berisi teks-teks yang akan dibersihkan dari kata-kata tidak baku. Kemudian, terdapat kamus mapping yang berisi kata-kata tidak baku dan kata-kata baku penggantinya.
+
+Untuk melakukan pembersihan teks, digunakan pengulangan menggunakan for pada setiap key pada kamus mapping. Setiap key akan diganti dengan nilai baku yang sesuai menggunakan fungsi replace() yang diaplikasikan pada kolom 'teks' di DataFrame.
+
+Hasil akhir dari pembersihan teks tersebut adalah sebuah DataFrame baru dengan kolom 'teks' yang sudah bersih dari kata-kata tidak baku dan sudah diganti dengan kata-kata baku. Output yang dihasilkan oleh kode di atas adalah sebagai berikut:
+
+markdown
+Copy code
+                                      teks
+0    saya tidak suka menulis dengan bahasa baku
+1  aku juga tidak terlalu suka banget dengan bahasa singkatan
+
+
+3. 
+
+ntuk mengganti kata-kata tidak baku menjadi baku dalam teks, selain menggunakan fungsi zip() dan dict() seperti yang telah dijelaskan sebelumnya, kita juga dapat menggunakan library NTLK dan memanfaatkan modul WordNet untuk melakukan stemming atau lemmatisasi.
+
+Berikut adalah contoh kode yang menggunakan NLTK dan WordNet untuk melakukan stemming pada kata-kata dalam teks:
+
+python
+Copy code
+import nltk
+from nltk.corpus import wordnet
+from nltk.stem import WordNetLemmatizer
+
+# Inisialisasi WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
+
+# Data teks yang akan dibersihkan
+text = "aku sangat suka nulis pke bhs alay, soalnya gampang dipahami orang."
+
+# Tokenisasi teks
+tokens = nltk.word_tokenize(text)
+
+# Menggunakan WordNetLemmatizer untuk melakukan stemming
+lemmatized_words = []
+for word in tokens:
+    # Mengambil pos tag kata
+    pos_tag = nltk.pos_tag([word])[0][1]
+    
+    # Mengubah pos tag ke format yang bisa dipahami oleh WordNetLemmatizer
+    if pos_tag.startswith('J'):
+        pos = wordnet.ADJ
+    elif pos_tag.startswith('V'):
+        pos = wordnet.VERB
+    elif pos_tag.startswith('N'):
+        pos = wordnet.NOUN
+    elif pos_tag.startswith('R'):
+        pos = wordnet.ADV
+    else:
+        pos = wordnet.NOUN
+    
+    # Melakukan stemming pada kata
+    lemmatized_word = lemmatizer.lemmatize(word, pos=pos)
+    
+    # Menambahkan kata yang sudah distem ke dalam list
+    lemmatized_words.append(lemmatized_word)
+
+# Menggabungkan kembali kata-kata yang sudah di-lemmatize
+cleaned_text = ' '.join(lemmatized_words)
+
+# Menampilkan hasil pembersihan teks
+print(cleaned_text)
+
+	=> penjelasan :
+	Pada kode di atas, terdapat teks yang akan dibersihkan yaitu "aku sangat suka nulis pke bhs alay, soalnya gampang dipahami orang.". Kemudian, teks tersebut di-tokenisasi menggunakan fungsi word_tokenize() dari library NLTK.
+
+Selanjutnya, untuk melakukan stemming pada setiap kata dalam teks, digunakan WordNetLemmatizer dari NLTK. Untuk dapat menggunakan WordNetLemmatizer, perlu dilakukan penentuan part-of-speech (pos) atau jenis kata dari setiap kata. Hal ini dilakukan dengan menggunakan fungsi pos_tag() dari NLTK yang akan mengembalikan jenis kata dari setiap kata dalam teks berupa tag yang standar.
+
+Setelah jenis kata dari setiap kata dalam teks diketahui, dilakukan stemming atau lemmatisasi menggunakan lemmatizer.lemmatize() pada setiap kata. Kata yang sudah di-lemmatize kemudian disimpan dalam sebuah list lemmatized_words.
+
+Terakhir, kata-kata yang sudah di-lemmatize digabungkan kembali menjadi sebuah teks bersih yang sudah terbebas dari kata-kata tidak baku.
+
+Hasil akhir dari pembersihan teks tersebut adalah "aku sangat suka tulis dengan bahasa baku, soal gampang paham orang.".
+
+
+4. menggunakan funsgi replace()
+
+Fungsi replace() pada objek DataFrame dapat digunakan untuk mengganti kata-kata tidak baku menjadi baku dengan cara yang berbeda tanpa menggunakan fungsi zip() dan dict().
+
+Berikut adalah contoh penggunaan fungsi replace() untuk mengganti kata-kata tidak baku menjadi baku dalam DataFrame alay_dict yang sama dengan kode yang telah disediakan:
+
+python
+Copy code
+import pandas as pd
+
+# Membaca file CSV
+alay_dict = pd.read_csv('new_kamusalay.csv', encoding='latin-1', header=None)
+
+# Mengubah nama kolom
+alay_dict = alay_dict.rename(columns={0: 'original',1: 'replacement'})
+
+# Mengganti kata-kata tidak baku menjadi baku dengan replace()
+alay_dict['original'] = alay_dict['original'].replace({'hlg': 'halo gan', 'lgsng': 'langsung'})
+
+# Menampilkan hasil
+print(alay_dict)
+
+	=> penjelasan 
+Pada kode di atas, pertama-tama dilakukan pembacaan file CSV new_kamusalay.csv menggunakan fungsi pd.read_csv(). Setelah itu, kolom pada DataFrame diubah namanya menggunakan fungsi rename(). Namun, dalam contoh ini, tidak dilakukan penggunaan dict() dan zip() untuk membentuk alay_dict_map.
+
+Selanjutnya, untuk mengganti kata-kata tidak baku menjadi baku, digunakan fungsi replace() pada kolom original. Pada contoh ini, kata-kata hlg diganti dengan halo gan, dan kata-kata lgsng diganti dengan langsung.
+
+Hasilnya akan menampilkan DataFrame alay_dict yang kolom original-nya sudah mengganti kata-kata tidak baku menjadi baku.
+
+
+5. 
+Jika data kata tidak baku dan baku sudah tersedia dalam 2 kolom terpisah pada suatu DataFrame, maka kita bisa menggunakan fungsi replace() pada kolom yang berisi kata tidak baku untuk menggantinya dengan kata baku yang sesuai. Dalam hal ini, alay_dict_map yang dibentuk dengan menggunakan zip() dan dict() dapat digunakan sebagai referensi untuk melakukan penggantian.
+
+Berikut adalah contoh kode yang mengganti kata tidak baku menjadi baku pada DataFrame df dengan memanfaatkan alay_dict_map:
+
+python
+Copy code
+import pandas as pd
+
+# membaca data dari file CSV
+df = pd.read_csv('data.csv')
+
+# membuat kamus penggantian dari kolom 'original' dan 'replacement'
+alay_dict_map = dict(zip(df['original'], df['replacement']))
+
+# mengganti kata tidak baku menjadi baku dengan replace()
+df['text'] = df['text'].replace(alay_dict_map, regex=True)
+
+# menampilkan hasil
+print(df)
+Pada kode di atas, pertama-tama dilakukan pembacaan data dari file CSV dengan menggunakan fungsi pd.read_csv(). Selanjutnya, alay_dict_map dibentuk dengan menggunakan fungsi zip() dan dict() dari kolom 'original' dan 'replacement' pada DataFrame.
+
+Untuk mengganti kata tidak baku menjadi baku, digunakan fungsi replace() pada kolom 'text'. alay_dict_map digunakan sebagai referensi untuk melakukan penggantian. Pada contoh ini, penggantian dilakukan dengan regex=True untuk memungkinkan penggantian yang bersifat case-insensitive.
+
+Setelah penggantian selesai dilakukan, DataFrame yang sudah di-update ditampilkan dengan fungsi print().
+
+
+6.
+Jika data kata tidak baku dan baku sudah tersedia dalam 2 kolom terpisah pada suatu DataFrame dan kita ingin mengganti kata tidak baku menjadi baku dengan fungsi replace() tanpa menggunakan fungsi zip() dan dict(), maka dapat dilakukan dengan mengiterasi setiap baris pada DataFrame dan mengganti kata tidak baku dengan kata baku menggunakan fungsi replace() pada kolom yang bersangkutan.
+
+Berikut adalah contoh kode yang mengganti kata tidak baku menjadi baku pada DataFrame df dengan menggunakan iterasi:
+
+python
+Copy code
+import pandas as pd
+
+# membaca data dari file CSV
+df = pd.read_csv('data.csv')
+
+# mengganti kata tidak baku menjadi baku dengan iterasi
+for index, row in df.iterrows():
+    text = row['text']
+    original = row['original']
+    replacement = row['replacement']
+    text = text.replace(original, replacement)
+    df.at[index, 'text'] = text
+
+# menampilkan hasil
+print(df)
+Pada kode di atas, dilakukan pembacaan data dari file CSV dengan menggunakan fungsi pd.read_csv(). Selanjutnya, dilakukan iterasi setiap baris pada DataFrame df. Pada setiap baris, kata tidak baku yang terdapat pada kolom 'text' diganti dengan kata baku yang sesuai dengan menggunakan fungsi replace(). Kemudian, kolom 'text' pada baris yang bersangkutan di-update dengan kata yang sudah diganti.
+
+Setelah penggantian selesai dilakukan, DataFrame yang sudah di-update ditampilkan dengan fungsi print(). Perlu diingat bahwa metode ini mungkin tidak efisien untuk DataFrame yang sangat besar karena menggunakan iterasi, sehingga memerlukan waktu eksekusi yang lebih lama.
+
+
+
+7. Jika data kata tidak baku dan baku sudah tersedia dalam 2 kolom terpisah pada suatu DataFrame dan ingin mengganti kata tidak baku menjadi baku dengan menggunakan fungsi lain yang dapat memuat data yang lebih besar daripada mengggunakan fungsi zip() dan dict(), maka dapat menggunakan metode map() pada kolom yang bersangkutan. Metode map() digunakan untuk menerapkan fungsi pada setiap elemen kolom.
+
+Berikut adalah contoh kode yang mengganti kata tidak baku menjadi baku pada DataFrame df dengan menggunakan metode map():
+
+python
+Copy code
+import pandas as pd
+
+# membaca data dari file CSV
+df = pd.read_csv('data.csv')
+
+# membuat mapping antara kata tidak baku dan baku
+alay_dict = pd.read_csv('new_kamusalay.csv', encoding='latin-1', header=None)
+alay_dict = alay_dict.rename(columns={0: 'original', 1: 'replacement'})
+alay_dict_map = alay_dict.set_index('original')['replacement'].to_dict()
+
+# mengganti kata tidak baku menjadi baku dengan metode map
+df['text'] = df['text'].map(lambda x: ' '.join([alay_dict_map[word] if word in alay_dict_map else word for word in x.split()]))
+
+# menampilkan hasil
+print(df)
+Pada kode di atas, dilakukan pembacaan data dari file CSV dengan menggunakan fungsi pd.read_csv(). Selanjutnya, dibuat mapping antara kata tidak baku dan baku menggunakan DataFrame alay_dict seperti pada contoh sebelumnya. Mapping ini kemudian disimpan dalam variabel alay_dict_map dalam bentuk dictionary.
+
+Untuk mengganti kata tidak baku menjadi baku pada kolom 'text' pada DataFrame df, digunakan metode map(). Pada setiap elemen kolom 'text', dilakukan split untuk memisahkan setiap kata dan kemudian setiap kata diganti dengan kata baku yang sesuai menggunakan metode lambda dan list comprehension. Kata baku atau kata tidak baku yang tidak terdapat dalam mapping akan tetap dipertahankan.
+
+Setelah penggantian selesai dilakukan, DataFrame yang sudah di-update ditampilkan dengan fungsi print(). Metode ini lebih efisien dibandingkan dengan metode iterasi karena mengggunakan metode map() yang bekerja lebih cepat untuk DataFrame yang lebih besar.

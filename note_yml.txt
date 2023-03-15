@@ -1,0 +1,53 @@
+https://swagger.io/docs/specification/2-0/basic-structure/
+
+https://swagger.io/docs/specification/about/
+
+******** POST BODY
+
+tags:
+  - name: Swagger_POST
+parameters:
+  - name: gold
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        name: 
+          type: string
+responses:
+    '200':
+      description: Successful response
+    '400':
+      description: Bad Request
+    '500':
+      description: Internal Server Error
+
+
+******** POST Upload
+
+tags:
+  - name: Upload
+parameters:
+  - name: file
+    type: file
+    in: formData
+    required: true
+responses:
+    '200':
+      description: Successful response
+    '400':
+      description: Bad Request
+    '500':
+      description: Internal Server Error
+    
+
+keterangan
+1. Tags: Digunakan untuk memberikan label/tag pada operasi tertentu di dalam API. Dalam contoh ini, operasi tersebut diberi tag "Swagger_POST".
+2. Parameters: Digunakan untuk mendefinisikan parameter yang diterima oleh operasi tertentu. Dalam contoh ini, parameter bernama "gold" diterima melalui body request.
+3. Responses: Digunakan untuk mendefinisikan respons yang akan diberikan oleh API ketika operasi tertentu berhasil dijalankan atau mengalami error. Dalam contoh ini, terdapat tiga respons yang mungkin terjadi, yaitu '200' (Success), '400' (Bad Request), dan '500' (Internal Server Error).
+
+detail mengenai "parameters"
+1. "name" digunakan untuk memberikan nama pada parameter tersebut.
+2. "in" digunakan untuk memberitahu di mana parameter tersebut akan ditemukan dalam request. Pada contoh ini, "in" diatur sebagai "body", yang berarti parameter akan ditemukan dalam bagian body dari request.
+3. "required" digunakan untuk menentukan apakah parameter tersebut harus diisi atau tidak. Jika diatur sebagai true, maka parameter tersebut harus diisi dalam request.
