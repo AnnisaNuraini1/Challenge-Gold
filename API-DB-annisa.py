@@ -103,6 +103,24 @@ swagger = Swagger(app, template=swagger_template, config=swagger_config)
 def home():
     return render_template("1_index.html")
 
+# GET API DATA DARI TABLE INPUT
+@swag_from("docs/get_tweet.yml", methods=["GET"])
+@app.route("/input", methods=["GET"])
+def get_api_input():
+    conn = sqlite3.connect("api_db_tweet.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM text_tweet")
+    rows = cursor.fetchall()
+    conn.close()
+
+    append_row = []
+    for row in rows:
+        append_row.append({"id": row[0], "tweet": row[1], "tweet_baru": row[2]})
+
+    json_response = {"Get API from Output Cleansing": append_row}
+
+    response_data = jsonify(json_response)
+    return response_data
 
 @swag_from("docs/post16.yml", methods=["POST"])
 @app.route("/input", methods=["POST"])
